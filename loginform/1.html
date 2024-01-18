@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .error {
+      color: red;
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('applicationForm');
+      const nameInput = document.getElementById('name');
+      const emailInput = document.getElementById('email');
+      const phoneInput = document.getElementById('phone');
+      const agreeCheckbox = document.getElementById('agree');
+      const errorContainer = document.getElementById('errorContainer');
+
+      form.addEventListener('submit', function (event) {
+        let errors = [];
+
+        if (nameInput.value.trim() === '') {
+          errors.push('Name is required');
+        }
+
+        if (emailInput.value.trim() === '') {
+          errors.push('Email is required');
+        } else if (!isValidEmail(emailInput.value.trim())) {
+          errors.push('Invalid email format');
+        }
+
+        if (phoneInput.value.trim() === '') {
+          errors.push('Phone number is required');
+        } else if (!isValidPhone(phoneInput.value.trim())) {
+          errors.push('Invalid phone number format');
+        }
+
+        if (!agreeCheckbox.checked) {
+          errors.push('You must agree to the terms');
+        }
+
+        if (errors.length > 0) {
+          event.preventDefault();
+          errorContainer.innerHTML = '<p class="error">' + errors.join('<br>') + '</p>';
+        }
+      });
+
+      function isValidEmail(email) {
+        // You can add a more sophisticated email validation logic if needed
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      }
+
+      function isValidPhone(phone) {
+        // You can add a more sophisticated phone number validation logic if needed
+        const phoneRegex = /^[0-9]{10}$/;
+        return phoneRegex.test(phone);
+      }
+    });
+  </script>
+</head>
+<body>
+
+  <form id="applicationForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email">
+
+    <label for="phone">Phone:</label>
+    <input type="text" id="phone" name="phone">
+
+    <label>
+      <input type="checkbox" id="agree" name="agree"> I agree to the terms
+    </label>
+
+    <div id="errorContainer"></div>
+
+    <button type="submit">Submit</button>
+  </form>
+
+</body>
+</html>

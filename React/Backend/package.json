@@ -1,0 +1,21 @@
+{
+  "name": "expressbackend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Saurabh",
+  "license": "ISC",
+  
+  "dependencies": {
+    "body-parser": "",
+    "bootstrap": "4.6",
+    "cors": "^2.8.5",
+    "express": "",
+    "mysql": "",
+    "nodemon": "",
+    "react-bootstrap": "^2.9.1"
+  }
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="myForm">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <span id="emailError" class="error"></span>
+
+    <br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <span id="passwordError" class="error"></span>
+
+    <br>
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <script>
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+      var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+
+      var emailError = document.getElementById('emailError');
+      var passwordError = document.getElementById('passwordError');
+
+      // Email validation
+      if (!isValidEmail(email)) {
+        event.preventDefault();
+        emailError.textContent = 'Please enter a valid email address.';
+      } else {
+        emailError.textContent = '';
+      }
+
+      // Password validation
+      if (!isValidPassword(password)) {
+        event.preventDefault();
+        passwordError.textContent = 'Password must be at least 8 characters long.';
+      } else {
+        passwordError.textContent = '';
+      }
+    });
+
+    function isValidEmail(email) {
+      // Basic email validation using a regular expression
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    function isValidPassword(password) {
+      // Password should be at least 8 characters long
+      return password.length >= 8;
+    }
+  </script>
+
+</body>
+</html>
